@@ -1,1 +1,180 @@
+/* --- General --- */
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background: #f5f5f7;
+  color: #222;
+  margin: 0;
+  padding: 0 1rem;
+}
 
+header {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+h1 {
+  font-size: 2rem;
+  margin-bottom: 0.2rem;
+}
+
+h2, h3 {
+  margin: 1rem 0 0.5rem;
+}
+
+/* --- Calendar Grid --- */
+#calendarGrid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 0.5rem;
+  margin-bottom: 2rem;
+}
+
+.day {
+  background: #fff;
+  border: 2px solid #ccc;
+  border-radius: 8px;
+  padding: 0.5rem;
+  text-align: center;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+  font-size: 0.9rem;
+}
+
+.day:hover {
+  transform: scale(1.05);
+  border-color: #888;
+}
+
+.current-day {
+  border-color: #007BFF;
+  background-color: #e6f0ff;
+}
+
+/* --- Metrics Form --- */
+#metricsFormContainer {
+  background: #fff;
+  padding: 1rem;
+  border-radius: 10px;
+  box-shadow: 0 0 12px rgba(0,0,0,0.05);
+  margin-bottom: 1rem;
+}
+
+#metricsForm label {
+  display: block;
+  margin-top: 1rem;
+  font-weight: 500;
+}
+
+#metricsForm textarea {
+  width: 100%;
+  min-height: 60px;
+  resize: vertical;
+  margin-top: 0.5rem;
+  padding: 0.5rem;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+}
+
+#metricsForm button[type="submit"] {
+  margin-top: 1rem;
+  padding: 0.6rem 1.2rem;
+  background-color: #007BFF;
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: all 0.2s ease-in-out;
+}
+
+#metricsForm button[type="submit"]:hover {
+  background-color: #0056b3;
+}
+
+/* --- Mood Picker --- */
+#moodPicker {
+  display: flex;
+  gap: 0.5rem;
+  margin-top: 0.5rem;
+}
+
+#moodPicker button {
+  font-size: 1.5rem;
+  cursor: pointer;
+  border: 2px solid #ccc;
+  border-radius: 50%;
+  background: #fff;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: all 0.2s ease-in-out;
+}
+
+#moodPicker button:hover, #moodPicker button.active {
+  border-color: #007BFF;
+  background-color: #e6f0ff;
+}
+
+/* --- Task Completed --- */
+#taskCompleted {
+  width: 100%;
+  padding: 0.4rem;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  margin-top: 0.5rem;
+}
+
+/* --- Focus Slider --- */
+#focusSlider {
+  width: 100%;
+  margin-top: 0.5rem;
+}
+
+#focusValue {
+  font-weight: 600;
+  margin-left: 0.5rem;
+}
+
+/* --- Progress Bars --- */
+.progressBarWrapper {
+  width: 100%;
+  height: 16px;
+  background-color: #e0e0e0;
+  border-radius: 8px;
+  margin-top: 0.5rem;
+  overflow: hidden;
+}
+
+.progressBar {
+  height: 100%;
+  width: 0%;
+  background-color: #007BFF;
+  border-radius: 8px;
+  transition: width 0.3s ease-in-out;
+}
+
+/* --- Motivation / Guidance --- */
+#motivationContainer {
+  background: #fff;
+  border-radius: 10px;
+  padding: 1rem;
+  margin-top: 1rem;
+  box-shadow: 0 0 12px rgba(0,0,0,0.05);
+  font-style: italic;
+  color: #444;
+}
+
+/* --- Responsive --- */
+@media (max-width: 768px) {
+  #calendarGrid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+@media (max-width: 480px) {
+  #calendarGrid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
