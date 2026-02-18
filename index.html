@@ -1,1 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ChronoForge - 13-Phase Productivity Calendar</title>
 
+  <!-- Optional: FontAwesome for icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" />
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body class="dark-theme">
+
+  <!-- Dark Theme Header -->
+  <header>
+    <h1>ChronoForge</h1>
+    <p>13-Phase Productivity Calendar – Track Cycles, Metrics & Progress</p>
+  </header>
+
+  <!-- Calendar Grid -->
+  <section id="calendarContainer">
+    <h2>Calendar</h2>
+    <div id="calendarGrid"></div>
+  </section>
+
+  <!-- Selected Day & Metrics -->
+  <section id="dayDetails">
+
+    <!-- Phase Info -->
+    <div id="phaseInfo">
+      <h3 id="phaseName"></h3>
+      <p id="phaseFocus">Focus: –</p>
+      <p id="phaseKPI">KPI: –</p>
+      <p id="phaseKillRule">Kill Rule: –</p>
+    </div>
+
+    <!-- Metrics Form -->
+    <div id="metricsFormContainer">
+      <form id="metricsForm">
+
+        <!-- Mood -->
+        <label>Mood:</label>
+        <div id="moodPicker">
+          <button type="button" data-energy="2">😴</button>
+          <button type="button" data-energy="4">😐</button>
+          <button type="button" data-energy="6">🙂</button>
+          <button type="button" data-energy="8">😃</button>
+          <button type="button" data-energy="10">🤩</button>
+        </div>
+
+        <!-- Task Completed -->
+        <label>Tasks Completed:</label>
+        <select id="taskCompleted">
+          <option value="0">Not Done</option>
+          <option value="5">Partially Done</option>
+          <option value="10">Fully Done</option>
+        </select>
+
+        <!-- Focus -->
+        <label>Focus:</label>
+        <input type="range" min="0" max="10" step="1" id="focusSlider">
+        <div id="focusScale">
+          <!-- Numbers 0–10 scale dynamically -->
+          <span>0</span><span>1</span><span>2</span><span>3</span><span>4</span>
+          <span>5</span><span>6</span><span>7</span><span>8</span><span>9</span><span>10</span>
+        </div>
+        <span id="focusValue">5</span>
+
+        <!-- Notes -->
+        <label>Notes / Reflection:</label>
+        <textarea id="notesInput" placeholder="Optional: write a reflection"></textarea>
+
+        <button type="submit">Save Metrics</button>
+      </form>
+    </div>
+
+    <!-- Stats Summary -->
+    <div id="statsSummary">
+      <h4>Stats Summary</h4>
+      <p>Avg Energy: <span id="avgEnergy">–</span></p>
+      <p>Total Output: <span id="totalOutput">–</span></p>
+      <p>Avg Quality: <span id="avgQuality">–</span></p>
+      <p>Consistency: <span id="consistency">–</span></p>
+    </div>
+
+    <!-- Progress Bars -->
+    <div id="progressContainer">
+      <div id="phaseProgressContainer">
+        <label>Phase Progress</label>
+        <div class="progressBarWrapper">
+          <div id="phaseProgress" class="progressBar"></div>
+        </div>
+      </div>
+
+      <div id="cycleProgressContainer">
+        <label>Cycle Progress</label>
+        <div class="progressBarWrapper">
+          <div id="cycleProgress" class="progressBar"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Motivational / Guidance -->
+    <div id="motivationContainer">
+      <p>Tip: Stay focused on your current tasks. Small steps build the cycle!</p>
+    </div>
+  </section>
+
+  <!-- JS -->
+  <script type="module" src="assets/js/engine.js"></script>
+  <script type="module">
+    import { ChronoEngine } from './assets/js/engine.js';
+    const chrono = new ChronoEngine('2001-01-04');
+    chrono.render();
+
+    // Focus slider live value update
+    const focusSlider = document.getElementById('focusSlider');
+    const focusValue = document.getElementById('focusValue');
+    focusSlider.addEventListener('input', () => {
+      focusValue.textContent = focusSlider.value;
+    });
+
+    // Optional: update focus bar color dynamically based on value
+    focusSlider.addEventListener('input', () => {
+      const percent = (focusSlider.value / 10) * 100;
+      focusValue.style.color = `hsl(${percent * 1.2}, 80%, 50%)`; // visual cue
+    });
+  </script>
+</body>
+</html>
