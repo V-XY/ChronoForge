@@ -1,8 +1,39 @@
-/* --- General --- */
+/* =====================================================
+   ChronoForge - 13-Phase Productivity Calendar
+   Full CSS: Dark/Light theme, 365-day grid, phases
+   Author: Virxee Visionary Design
+===================================================== */
+
+/* --- Root Variables for Themes --- */
+:root {
+  --bg-color: #f5f5f7;
+  --text-color: #222;
+  --accent-color: #007BFF;
+  --day-bg: #fff;
+  --day-border: #ccc;
+  --progress-bg: #e0e0e0;
+  --progress-color: #007BFF;
+  --motivation-bg: #fff;
+  --motivation-text: #444;
+}
+
+/* Dark theme overrides */
+body.dark-theme {
+  --bg-color: #121212;
+  --text-color: #eee;
+  --day-bg: #1f1f1f;
+  --day-border: #444;
+  --progress-bg: #333;
+  --progress-color: #4db6ac;
+  --motivation-bg: #1e1e1e;
+  --motivation-text: #ccc;
+}
+
+/* --- General Body & Typography --- */
 body {
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  background: #f5f5f7;
-  color: #222;
+  background: var(--bg-color);
+  color: var(--text-color);
   margin: 0;
   padding: 0 1rem;
 }
@@ -21,38 +52,54 @@ h2, h3 {
   margin: 1rem 0 0.5rem;
 }
 
-/* --- Calendar Grid --- */
+/* =====================================================
+   Calendar Container & Grid
+===================================================== */
+#calendarContainer {
+  margin-bottom: 2rem;
+  overflow-x: auto; /* allow horizontal scroll for full-year view */
+}
+
 #calendarGrid {
   display: grid;
-  grid-template-columns: repeat(7, 1fr);
-  gap: 0.5rem;
-  margin-bottom: 2rem;
+  grid-template-columns: repeat(7, 1fr); /* 7 days per week */
+  gap: 0.4rem;
 }
 
 .day {
-  background: #fff;
-  border: 2px solid #ccc;
+  background: var(--day-bg);
+  border: 2px solid var(--day-border);
   border-radius: 8px;
   padding: 0.5rem;
   text-align: center;
   cursor: pointer;
-  transition: all 0.2s ease-in-out;
   font-size: 0.9rem;
+  transition: all 0.2s ease-in-out;
 }
 
 .day:hover {
   transform: scale(1.05);
-  border-color: #888;
+  border-color: var(--accent-color);
 }
 
 .current-day {
-  border-color: #007BFF;
-  background-color: #e6f0ff;
+  border-color: var(--accent-color);
+  background-color: #e6f0ff; /* optional: override per theme via JS */
 }
 
-/* --- Metrics Form --- */
+/* Phase-based coloring (to be applied dynamically via JS) */
+.phase-storm { background-color: #4db6ac; color: #fff; }
+.phase-seed { background-color: #ffb74d; color: #fff; }
+.phase-moon { background-color: #9575cd; color: #fff; }
+.phase-human { background-color: #f06292; color: #fff; }
+.phase-sky { background-color: #4fc3f7; color: #fff; }
+/* Repeat for 13 phases as needed */
+
+/* =====================================================
+   Metrics Form & Inputs
+===================================================== */
 #metricsFormContainer {
-  background: #fff;
+  background: var(--day-bg);
   padding: 1rem;
   border-radius: 10px;
   box-shadow: 0 0 12px rgba(0,0,0,0.05);
@@ -73,12 +120,14 @@ h2, h3 {
   padding: 0.5rem;
   border-radius: 6px;
   border: 1px solid #ccc;
+  background: var(--day-bg);
+  color: var(--text-color);
 }
 
 #metricsForm button[type="submit"] {
   margin-top: 1rem;
   padding: 0.6rem 1.2rem;
-  background-color: #007BFF;
+  background-color: var(--accent-color);
   color: #fff;
   border: none;
   border-radius: 6px;
@@ -88,10 +137,10 @@ h2, h3 {
 }
 
 #metricsForm button[type="submit"]:hover {
-  background-color: #0056b3;
+  opacity: 0.85;
 }
 
-/* --- Mood Picker --- */
+/* Mood Picker */
 #moodPicker {
   display: flex;
   gap: 0.5rem;
@@ -101,9 +150,9 @@ h2, h3 {
 #moodPicker button {
   font-size: 1.5rem;
   cursor: pointer;
-  border: 2px solid #ccc;
+  border: 2px solid var(--day-border);
   border-radius: 50%;
-  background: #fff;
+  background: var(--day-bg);
   width: 40px;
   height: 40px;
   display: flex;
@@ -112,21 +161,24 @@ h2, h3 {
   transition: all 0.2s ease-in-out;
 }
 
-#moodPicker button:hover, #moodPicker button.active {
-  border-color: #007BFF;
-  background-color: #e6f0ff;
+#moodPicker button:hover,
+#moodPicker button.active {
+  border-color: var(--accent-color);
+  background-color: #e6f0ff; /* can be themed via JS */
 }
 
-/* --- Task Completed --- */
+/* Task Completion */
 #taskCompleted {
   width: 100%;
   padding: 0.4rem;
   border-radius: 6px;
   border: 1px solid #ccc;
   margin-top: 0.5rem;
+  background: var(--day-bg);
+  color: var(--text-color);
 }
 
-/* --- Focus Slider --- */
+/* Focus Slider */
 #focusSlider {
   width: 100%;
   margin-top: 0.5rem;
@@ -137,11 +189,37 @@ h2, h3 {
   margin-left: 0.5rem;
 }
 
-/* --- Progress Bars --- */
+/* Focus Scale Numbers */
+#focusScale {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 0.2rem;
+  font-size: 0.8rem;
+  color: #777;
+}
+
+/* =====================================================
+   Stats Summary
+===================================================== */
+#statsSummary {
+  background: var(--day-bg);
+  padding: 1rem;
+  border-radius: 10px;
+  margin-top: 1rem;
+  box-shadow: 0 0 12px rgba(0,0,0,0.05);
+}
+
+#statsSummary h4 {
+  margin-top: 0;
+}
+
+/* =====================================================
+   Progress Bars
+===================================================== */
 .progressBarWrapper {
   width: 100%;
   height: 16px;
-  background-color: #e0e0e0;
+  background-color: var(--progress-bg);
   border-radius: 8px;
   margin-top: 0.5rem;
   overflow: hidden;
@@ -150,23 +228,33 @@ h2, h3 {
 .progressBar {
   height: 100%;
   width: 0%;
-  background-color: #007BFF;
+  background-color: var(--progress-color);
   border-radius: 8px;
   transition: width 0.3s ease-in-out;
 }
 
-/* --- Motivation / Guidance --- */
+/* =====================================================
+   Motivation / Guidance
+===================================================== */
 #motivationContainer {
-  background: #fff;
+  background: var(--motivation-bg);
   border-radius: 10px;
   padding: 1rem;
   margin-top: 1rem;
   box-shadow: 0 0 12px rgba(0,0,0,0.05);
   font-style: italic;
-  color: #444;
+  color: var(--motivation-text);
 }
 
-/* --- Responsive --- */
+/* =====================================================
+   Responsive / Mobile
+===================================================== */
+@media (max-width: 1024px) {
+  #calendarGrid {
+    grid-template-columns: repeat(7, 1fr);
+  }
+}
+
 @media (max-width: 768px) {
   #calendarGrid {
     grid-template-columns: repeat(4, 1fr);
